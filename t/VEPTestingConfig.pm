@@ -68,9 +68,12 @@ our %DEFAULTS = (
   custom_bed     => $Bin.'/testdata/custom/test.bed.gz',
   custom_vcf     => $Bin.'/testdata/custom/test.vcf.gz',
   custom_gff     => $Bin.'/testdata/custom/test.gff.gz',
+  custom_gff3_new   => $Bin.'/testdata/custom/test_new.gff3.gz',
   custom_refseq_gff => $Bin.'/testdata/custom/refseq.gff.gz',
   custom_gtf     => $Bin.'/testdata/custom/test.gtf.gz',
   custom_gtf_mt     => $Bin.'/testdata/custom/test_MT.gtf.gz',
+  custom_gtf_new => $Bin.'/testdata/custom/test_new.gtf.gz',
+  custom_gtf_mt_new => $Bin.'/testdata/custom/test_MT_new.gtf.gz',
   custom_bigwig  => $Bin.'/testdata/custom/test.bw',
 
   bam_edit_gff   => $Bin.'/testdata/custom/bam_edit.gff.gz',
