@@ -7,17 +7,11 @@ on:
     branches:
       - 'postreleasefix/*'
 jobs:
-  printJob:    
-    name: Print event
-    runs-on: ubuntu-latest
-    steps:
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: |
-        echo "$GITHUB_CONTEXT"
   sync-branch:
     runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.merged == true &&
+      contains(github.event.pull_request.labels.*.name, 'auto-merge')
     steps:      
       - uses: actions/checkout@master
 
