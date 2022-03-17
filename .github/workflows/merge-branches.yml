@@ -1,10 +1,14 @@
 name: Merge postreleasefix with release and master branches
 
-on: pull_request
+on:
+  pull_request:
+    types:
+      - closed # Run after closing PR
+    branches:
+      - 'postreleasefix/*'
 jobs:
   sync-branch:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && github.event.label.name == 'auto-merge'
     steps:      
       - uses: actions/checkout@master
 
