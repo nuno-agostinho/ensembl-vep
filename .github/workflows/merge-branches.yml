@@ -1,11 +1,6 @@
 name: Merge postreleasefix with release and master branches
 
-on:
-  pull_request:
-    types:
-      - closed # Run after closing PR
-    branches:
-      - 'postreleasefix/*'
+on: pull_request
 jobs:
   sync-branch:
     runs-on: ubuntu-latest
