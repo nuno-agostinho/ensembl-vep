@@ -1,6 +1,9 @@
 name: Merge postreleasefix with release and master branches
+
 on:
-  push:
+  pull_request:
+    types:
+      - closed # Run after closing PR
     branches:
       - 'postreleasefix/*'
 jobs:
