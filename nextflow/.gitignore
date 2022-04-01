@@ -1,7 +1,9 @@
 *.nextflow*
 *.ini
 work/
+input/
 outdir/
+scripts/
 singularity-images/
 *.vcf.gz
 *.tbi
