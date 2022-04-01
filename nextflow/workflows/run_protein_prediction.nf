@@ -22,10 +22,10 @@ blastdb_name = file(params.blastdb).name
 blastdb_dir = file(params.blastdb).parent
 
 // module imports
-include { getTranslation }            from './nf_modules/run_agat.nf'
-include { sift; alignProteins }       from './nf_modules/run_sift.nf'
-include { pph2; weka }                from './nf_modules/run_polyphen2.nf'
-include { getAminoacidSubstitutions } from './nf_modules/create_substitutions.nf'
+include { getTranslation }            from '../nf_modules/run_agat.nf'
+include { sift; alignProteins }       from '../nf_modules/run_sift.nf'
+include { pph2; weka }                from '../nf_modules/run_polyphen2.nf'
+include { getAminoacidSubstitutions } from '../nf_modules/create_substitutions.nf'
 
 // print usage
 if (params.help) {
@@ -34,7 +34,10 @@ if (params.help) {
   --------------------------------------------------------------
 
   Usage:
-    nextflow run main.nf
+    nextflow -C nf_config/nextflow.config run \
+             workflows/run_protein_prediction.nf \
+             --gtf [path/to/gtf] --fasta [path/to/fasta] \
+             -profile lsf -resume
 
   Options:
     --gtf                  Annotation GTF file

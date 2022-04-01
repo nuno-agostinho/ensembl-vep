@@ -1,6 +1,7 @@
 *.nextflow*
 *.ini
 work/
+input
 input/
 outdir/
 scripts/
