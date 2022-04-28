@@ -4,7 +4,7 @@
 
 nextflow.enable.dsl=2
 
-// params default
+// default params
 params.help = false
 params.outdir = "outdir"
 params.singularity_dir = "singularity-images"
@@ -59,7 +59,7 @@ log.info """
     program : ${params.program}
 """
 
-workflow {
+workflow run_protein_prediction {
   // Translate transcripts from GTF and FASTA
   getTranslation(file(params.gtf), file(params.fasta))
   translated = getTranslation.out.splitFasta(by: 1, file: true)
@@ -81,6 +81,10 @@ workflow {
     pph2(translated, subs)
     // weka()
   }
+}
+
+workflow {
+  run_protein_prediction()
 }
 
 // Print summary

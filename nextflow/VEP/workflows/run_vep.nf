@@ -11,8 +11,7 @@ nextflow.enable.dsl=2
 params.help = false
 params.cpus = 1
 params.outdir = "outdir"
-params.vep_config=""
-params.singularity_dir=""
+params.vep_config="nf_config/vep.ini"
 
 // module imports
 include { splitVCF } from '../nf_modules/split_into_chros.nf' 
@@ -72,10 +71,17 @@ if( !vepFile.exists() ) {
 
 log.info 'Starting workflow.....'
 
-workflow {
-  chr_str = params.chros.toString()
-  chr = Channel.of(chr_str.split(','))
-  splitVCF(chr, params.vcf, vcf_index)
-  chrosVEP(splitVCF.out, params.vep_config)
-  mergeVCF(chrosVEP.out.vcfFile.collect(), chrosVEP.out.indexFile.collect())
+workflow run_vep {
+  main:
+    chr_str = params.chros.toString()
+    chr = Channel.of(chr_str.split(',')).view()
+    splitVCF(chr, file( params.vcf ), file( vcf_index ))
+    chrosVEP(splitVCF.out, file( params.vep_config ))
+    mergeVCF(chrosVEP.out.vcfFile.collect(), chrosVEP.out.indexFile.collect())
+  emit:
+    mergeVCF.out
 }  
+
+workflow {
+  run_vep()
+}

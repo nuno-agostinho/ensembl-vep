@@ -47,6 +47,7 @@ process sift {
   container "${params.singularity_dir}/sift.sif"
   memory '4 GB'
   errorStrategy 'ignore'
+  publishDir "${params.outdir}/sift"
 
   input:
     path aln
@@ -54,8 +55,6 @@ process sift {
 
   output:
     path '*.SIFTprediction'
-
-  publishDir "${params.outdir}/sift"
 
   """
   info_on_seqs $aln $subs protein.SIFTprediction

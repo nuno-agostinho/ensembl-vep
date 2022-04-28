@@ -15,8 +15,10 @@ process getTranslation {
   */
 
   tag "${gtf}"
-  container "${params.singularity_dir}/agat.simg"
-  memory '8 GB'  
+  container "quay.io/biocontainers/agat:0.9.0--pl5321hdfd78af_0"
+  // container "${params.singularity_dir}/agat.simg"
+  memory '20 GB'
+  publishDir "${params.outdir}"
 
   input:
     path gtf

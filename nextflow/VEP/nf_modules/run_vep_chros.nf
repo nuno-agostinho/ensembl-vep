@@ -25,7 +25,7 @@ process chrosVEP {
     pattern: "${prefix}-*.vcf.gz_summary.html",
     mode:'move'
   cpus params.cpus
-  container "${params.singularity_dir}/vep.sif"
+  container "ensemblorg/ensembl-vep:latest"
 
   input:
   tuple path(vcfFile), path(indexFile)

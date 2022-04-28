@@ -59,6 +59,7 @@ process weka {
   */
 
   container "${params.singularity_dir}/polyphen2.sif"
+  errorStrategy 'ignore'
 
   input:
     path model
