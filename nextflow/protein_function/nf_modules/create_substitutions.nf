@@ -27,7 +27,7 @@ process getAminoacidSubstitutions {
   for ref in `grep -o . <<< !{peptide.seqString}`; do
     ((pos+=1))
     # ignore non-standard amino acids (e.g. X) when using PolyPhen-2
-    if [[ $program == "pph2" && ! " ${ALL_AAS[*]} " =~ " ${ref} " ]]; then
+    if [[ $program == "polyphen2" && ! " ${ALL_AAS[*]} " =~ " ${ref} " ]]; then
       continue
     fi
 
@@ -36,7 +36,7 @@ process getAminoacidSubstitutions {
         continue
       elif [[ $program == "sift" ]]; then
         output="$ref$pos$alt"
-      elif [[ $program == "pph2" ]]; then
+      elif [[ $program == "polyphen2" ]]; then
         output="!{peptide.id}\t$pos\t$ref\t$alt"
       fi
         echo $output >> subs.txt

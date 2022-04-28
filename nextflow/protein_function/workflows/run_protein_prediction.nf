@@ -13,7 +13,7 @@ params.singularity_dir = "singularity-images"
 params.gtf="input/annotation/sample_human.gtf"
 // params.fasta="input/fasta/Canis_lupus_familiarisbasenji.Basenji_breed-1.1.dna_sm.toplevel.fa"
 params.fasta="input/fasta/Homo_sapiens.GRCh38.dna_sm.toplevel.fa"
-params.program="sift"
+params.program="polyphen2"
 
 // SIFT-specific parameters
 params.median_cutoff = 2.75 // as per SIFT's README
