@@ -27,6 +27,7 @@ process pph2 {
       2) Errors '*.err'
   */
 
+  tag "${subs.baseName}"
   container "${params.singularity_dir}/polyphen2.sif"
   containerOptions "--bind $dssp,$wwpdb,$precomputed,$nrdb,$pdb2fasta,$ucsc,$uniprot"
   memory '4 GB'
@@ -37,13 +38,15 @@ process pph2 {
     path subs
 
   output:
-    path 'polyphen.*'
+    path '*.txt'
+    path '*.err'
 
   publishDir "${params.outdir}/polyphen-2"
 
   """
   mkdir -p tmp/lock
-  run_pph.pl -A -d tmp -s $protein $subs 1> polyphen.txt 2> polyphen.err
+  run_pph.pl -A -d tmp -s $protein $subs \
+             1> ${subs.baseName}.txt 2> ${subs.baseName}.err
   """
 }
 
