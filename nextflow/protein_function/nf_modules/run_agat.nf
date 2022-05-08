@@ -16,7 +16,6 @@ process getTranslation {
 
   tag "${gtf}"
   container "quay.io/biocontainers/agat:0.9.0--pl5321hdfd78af_0"
-  // container "${params.singularity_dir}/agat.simg"
   memory '20 GB'
   publishDir "${params.outdir}"
 
@@ -27,7 +26,13 @@ process getTranslation {
   output:
     path 'translated.fa'
 
-  """
-  agat_sp_extract_sequences.pl -g $gtf -f $fasta --protein -o translated.fa
-  """
+  script:
+    """
+    agat_sp_extract_sequences.pl -g $gtf -f $fasta --protein -o translated.fa
+    """
+
+  stub:
+    """
+    cp /homes/nuno/workspace/sift-polyphen2-nextflow-vep-4667/ensembl-vep/nextflow/protein_function/outdir/translated.fa .
+    """
 }
