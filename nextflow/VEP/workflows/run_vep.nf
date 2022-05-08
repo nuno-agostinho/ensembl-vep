@@ -55,13 +55,13 @@ if(check_bgzipped.exitValue()){
   exit 1, "The specified VCF file is not bgzipped: ${params.vcf}"
 }
 
-def sout = new StringBuilder(), serr = new StringBuilder()
-check_parsing = "$params.singularity_dir/vep.sif tabix -p vcf -f $params.vcf".execute()
-check_parsing.consumeProcessOutput(sout, serr)
-check_parsing.waitFor()
-if( serr ){
-  exit 1, "The specified VCF file has issues in parsing: $serr"
-}
+//def sout = new StringBuilder(), serr = new StringBuilder()
+//check_parsing = "$params.singularity_dir/vep.sif tabix -p vcf -f $params.vcf".execute()
+//check_parsing.consumeProcessOutput(sout, serr)
+//check_parsing.waitFor()
+//if( serr ){
+//  exit 1, "The specified VCF file has issues in parsing: $serr"
+//}
 vcf_index = "${params.vcf}.tbi"
 
 vepFile = file(params.vep_config)
@@ -79,7 +79,8 @@ workflow run_vep {
     chrosVEP(splitVCF.out, file( params.vep_config ))
     mergeVCF(chrosVEP.out.vcfFile.collect(), chrosVEP.out.indexFile.collect())
   emit:
-    mergeVCF.out
+    vcfFile = mergeVCF.out.vcfFile
+    indexFile = mergeVCF.out.indexFile
 }  
 
 workflow {

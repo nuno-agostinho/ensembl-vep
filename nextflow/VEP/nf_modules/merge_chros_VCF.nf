@@ -29,14 +29,14 @@ process mergeVCF {
     
   cpus params.cpus
   container "quay.io/biocontainers/bcftools:1.13--h3a49de5_0"
-
    
   input:
   path(vcfFiles)
   path(indexFiles)
 
   output:
-  path("${ mergedVCF }.vcf.gz*")
+  path("${ mergedVCF }.vcf.gz"), emit: vcfFile                                     
+  path("${ mergedVCF }.vcf.gz.tbi"), emit: indexFile
 
   script: 
   """
