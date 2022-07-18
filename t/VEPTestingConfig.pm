@@ -35,7 +35,7 @@ our %DEFAULTS = (
     allele_string strand minor_allele minor_allele_freq
     clin_sig phenotype_or_disease pubmed
     AFR AMR EAS EUR SAS AA EA
-    gnomAD gnomAD_AFR gnomAD_AMR gnomAD_ASJ gnomAD_EAS gnomAD_FIN gnomAD_NFE gnomAD_OTH gnomAD_SAS
+    gnomADe gnomADe_AFR gnomADe_AMR gnomADe_ASJ gnomADe_EAS gnomADe_FIN gnomADe_NFE gnomADe_OTH gnomADe_SAS
   )],
 
   chr_synonyms   => $Bin.'/testdata/chr_synonyms.txt',
@@ -52,12 +52,13 @@ our %DEFAULTS = (
   registry_file  => $Bin.'/testdata/vep.registry',
 
   test_vcf       => $Bin.'/testdata/input/test.vcf',
-  test_vcf2      => $Bin.'/testdata/input/test2.vcf',
-  test_vcf3      => $Bin.'/testdata/input/test3.vcf',
-  test_vcf4      => $Bin.'/testdata/input/test4.vcf',
-  test_vcf5      => $Bin.'/testdata/input/test5.vcf',
-  test_vcf6      => $Bin.'/testdata/input/test6.vcf',
-  test_vcf_MT    => $Bin.'/testdata/input/test_MT.vcf',
+  test_vcf2      => $Bin.'/testdata/input/test2.vcf.gz',
+  test_vcf3      => $Bin.'/testdata/input/test3.vcf.gz',
+  test_vcf4      => $Bin.'/testdata/input/test4.vcf.gz',
+  test_vcf5      => $Bin.'/testdata/input/test5.vcf.gz',
+  test_vcf6      => $Bin.'/testdata/input/test6.vcf.gz',
+  test_vcf21     => $Bin.'/testdata/input/test21.vcf.gz',
+  test_vcf_MT    => $Bin.'/testdata/input/testMT.vcf.gz',
   not_ord_vcf    => $Bin.'/testdata/input/test_not_ordered.vcf',
   no_trans_vcf   => $Bin.'/testdata/input/test_no_trans.vcf',
   vr_vcf         => $Bin.'/testdata/input/idt_test.vcf',
@@ -67,6 +68,7 @@ our %DEFAULTS = (
 
   custom_bed     => $Bin.'/testdata/custom/test.bed.gz',
   custom_vcf     => $Bin.'/testdata/custom/test.vcf.gz',
+  custom_vcf_2   => $Bin.'/testdata/custom/test2.vcf.gz',
   custom_gff     => $Bin.'/testdata/custom/test.gff.gz',
   custom_refseq_gff => $Bin.'/testdata/custom/refseq.gff.gz',
   custom_gtf     => $Bin.'/testdata/custom/test.gtf.gz',
