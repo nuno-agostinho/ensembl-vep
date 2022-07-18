@@ -7,7 +7,6 @@ nextflow.enable.dsl=2
 // default params
 params.help = false
 params.outdir = "outdir"
-params.singularity_dir = "singularity-images"
 
 // params.gtf="input/annotation/sample.gtf"
 params.gtf="input/annotation/sample_human.gtf"
