@@ -5,6 +5,8 @@ input
 input/
 outdir/
 scripts/
-singularity-images/
+reports/
 *.vcf.gz
 *.tbi
+*.log
+run.sh
