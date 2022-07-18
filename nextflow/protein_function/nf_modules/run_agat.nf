@@ -24,15 +24,11 @@ process getTranslation {
     path fasta
 
   output:
-    path 'translated.fa'
+    path '*_translated.fa'
 
   script:
     """
-    agat_sp_extract_sequences.pl -g $gtf -f $fasta --protein -o translated.fa
-    """
-
-  stub:
-    """
-    cp /homes/nuno/workspace/sift-polyphen2-nextflow-vep-4667/ensembl-vep/nextflow/protein_function/outdir/translated.fa .
+    agat_sp_extract_sequences.pl -g $gtf -f $fasta --protein \
+                                 -o ${gtf.baseName}_translated.fa
     """
 }

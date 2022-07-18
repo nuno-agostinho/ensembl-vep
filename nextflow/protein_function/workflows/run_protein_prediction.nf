@@ -21,6 +21,9 @@ params.blastdb="input/sift/uniref100/uniref100_seg.sift.fa"
 blastdb_name = file(params.blastdb).name
 blastdb_dir = file(params.blastdb).parent
 
+// PolyPhen-2-specific parameters
+params.model = "HumDiv.UniRef100.NBd.f11.model"
+
 // module imports
 include { getTranslation }            from '../nf_modules/run_agat.nf'
 include { sift; alignProteins }       from '../nf_modules/run_sift.nf'
@@ -30,8 +33,8 @@ include { getAminoacidSubstitutions } from '../nf_modules/create_substitutions.n
 // print usage
 if (params.help) {
   log.info """
-  Pipeline to predict protein function using SIFT and PolyPhen-2
-  --------------------------------------------------------------
+  Predict protein function using SIFT and PolyPhen-2
+  --------------------------------------------------
 
   Usage:
     nextflow -C nf_config/nextflow.config run \
@@ -40,24 +43,30 @@ if (params.help) {
              -profile lsf -resume
 
   Options:
-    --gtf                  Annotation GTF file
-    --fasta                Genomic sequence FASTA file
-    --program              "sift" (SIFT) or "polyphen2" (PolyPhen-2). Default: "sift"
+    --gtf FILE             Annotation GTF file
+    --fasta FILE           Genomic sequence FASTA file
+    --program VAL          "sift" (default) or "polyphen2"
     --outdir DIRNAME       Name of output dir. Default: outdir
 
   SIFT options:
     --blastdb DIR          Path to SIFT-formatted BLAST database, e.g. uniref100
     --median_cutoff VALUE  Protein alignment's median cutoff. Default: 2.75
+
+  PolyPhen-2 options:
+    --model VALUE          WEKA model used to calculate PolyPhen-2 scores; can
+                           be either "HumDiv.UniRef100.NBd.f11.model" (default)
+                           or "HumVar.UniRef100.NBd.f11.model"
   """
   exit 1
 }
 
 log.info """
-  Starting workflow...
-    GTF     : ${params.gtf}
-    FASTA   : ${params.fasta}
-    program : ${params.program}
-"""
+  Predict protein function using SIFT and PolyPhen-2
+  --------------------------------------------------
+  GTF     : ${params.gtf}
+  FASTA   : ${params.fasta}
+  program : ${params.program}
+  """
 
 workflow run_protein_prediction {
   // Translate transcripts from GTF and FASTA
@@ -79,7 +88,7 @@ workflow run_protein_prediction {
   } else if (params.program == "polyphen2" ) {
     // Run PolyPhen-2
     pph2(translated, subs)
-    // weka()
+    weka(params.model, pph2.out.results)
   }
 }
 
