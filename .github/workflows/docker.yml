@@ -11,6 +11,8 @@ jobs:
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v4
+        with:
+          images: nunoagostinho/ensembl-vep
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
