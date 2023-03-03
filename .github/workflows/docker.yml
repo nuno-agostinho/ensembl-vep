@@ -10,14 +10,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Sanitize $GITHUB_REF
-        run: echo "CACHE_KEY=${GITHUB_REF/\///_}" >> $GITHUB_ENV
-
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v4
         with:
           images: nunoagostinho/ensembl-vep
+          tags: |
+            # example of Docker tag: release_109.3 (for consistency with previous releases)
+            type=match,pattern=release/(.*),group=1,prefix=release_
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
