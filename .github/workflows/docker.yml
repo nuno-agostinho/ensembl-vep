@@ -24,8 +24,8 @@ jobs:
           tags: |
             # example of Docker tag: release_109.3 (for consistency with previous releases)
             type=match,pattern=release/(.*),group=1,prefix=release_
-            # manual Docker tag (ignored if empty)
-            type=raw,value=latest,enable=${{ github.event.inputs.docker-tag || true}}
+          flavour: |
+            latest=${{ github.event.inputs.docker-tag || true}}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
