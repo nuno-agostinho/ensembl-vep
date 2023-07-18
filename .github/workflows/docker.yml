@@ -2,6 +2,12 @@ name: Docker
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      docker-tag:
+        description: 'Docker image release tag (e.g., release_110.0)'
+        required: true
+        default: ''
 
 jobs:
   docker:
@@ -18,6 +24,8 @@ jobs:
           tags: |
             # example of Docker tag: release_109.3 (for consistency with previous releases)
             type=match,pattern=release/(.*),group=1,prefix=release_
+            # manual Docker tag (ignored if empty)
+            ${{ github.event.inputs.docker-tag }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
